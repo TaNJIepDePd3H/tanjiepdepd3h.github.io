@@ -1,20 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Interactive Image Gallery</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Wildlife Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        #display {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto 20px;
+            border: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .thumbnail:hover, .thumbnail:focus {
+            border-color: #3498db;
+            transform: scale(1.02);
+            outline: none;
+        }
+        .caption {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
 </head>
-<body>
+<body onload="initializeGallery()">
     <div class="container">
-        <div id="image">
-            Hover over an image below to display here.
+        <h1>Wildlife Photography Gallery</h1>
+        <div id="display" tabindex="0">
+            Hover over or focus on an image below to display here
         </div>
         <div class="gallery">
-            <img class="preview" src="Dog.jpg" alt="Dog Image" onmouseover="upDate(this)" onmouseout="unDo()">
-            <img class="preview" src="Cat.jpg" alt="Cat Image" onmouseover="upDate(this)" onmouseout="unDo()">
-            <img class="preview" src="Bird.jpg" alt="Bird Image" onmouseover="upDate(this)" onmouseout="unDo()">
+            <figure>
+                <img src="lion.jpg" alt="Male lion resting in the savanna" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">African Lion</figcaption>
+            </figure>
+            <figure>
+                <img src="elephant.jpg" alt="Elephant herd walking in the grassland" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">Elephant Herd</figcaption>
+            </figure>
+            <figure>
+                <img src="penguin.jpg" alt="Group of penguins on iceberg" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">Antarctic Penguins</figcaption>
+            </figure>
+            <figure>
+                <img src="wolf.jpg" alt="Gray wolf howling in the forest" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">Gray Wolf</figcaption>
+            </figure>
+            <figure>
+                <img src="eagle.jpg" alt="Bald eagle flying with wings spread" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">Bald Eagle</figcaption>
+            </figure>
+            <figure>
+                <img src="tiger.jpg" alt="Bengal tiger walking through jungle" class="thumbnail" 
+                     onmouseover="updateDisplay(this)" onmouseleave="resetDisplay()"
+                     onfocus="updateDisplay(this)" onblur="resetDisplay()">
+                <figcaption class="caption">Bengal Tiger</figcaption>
+            </figure>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        function updateDisplay(previewPic) {
+            const display = document.getElementById('display');
+            display.style.backgroundImage = `url('${previewPic.src}')`;
+            display.textContent = previewPic.alt;
+            display.style.backgroundSize = 'cover';
+            display.style.color = 'white';
+            display.style.textShadow = '1px 1px 3px black';
+            display.style.fontSize = '24px';
+            display.style.fontWeight = 'bold';
+        }
+
+        function resetDisplay() {
+            const display = document.getElementById('display');
+            display.style.backgroundImage = 'none';
+            display.textContent = 'Hover over or focus on an image below to display here';
+            display.style.color = 'black';
+            display.style.textShadow = 'none';
+            display.style.fontSize = '16px';
+            display.style.fontWeight = 'normal';
+        }
+
+        function initializeGallery() {
+            console.log('Gallery initialized successfully');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            thumbnails.forEach((thumbnail, index) => {
+                thumbnail.setAttribute('tabindex', '0');
+                thumbnail.parentNode.setAttribute('tabindex', '0');
+                console.log(`Added tabindex to image ${index + 1}`);
+            });
+        }
+    </script>
 </body>
 </html>
