@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Image Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="image">
+            Hover over an image below to display here.
+        </div>
+        <div class="gallery">
+            <img class="preview" src="Dog.jpg" alt="Dog Image" onmouseover="upDate(this)" onmouseout="unDo()">
+            <img class="preview" src="Cat.jpg" alt="Cat Image" onmouseover="upDate(this)" onmouseout="unDo()">
+            <img class="preview" src="Bird.jpg" alt="Bird Image" onmouseover="upDate(this)" onmouseout="unDo()">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
